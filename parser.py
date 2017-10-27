@@ -32,28 +32,6 @@ def skip(word_list, word_type):
     while peek(word_list) == word_type:
         match(word_list, word_type)
 
-class Parse(object):
-
-#    wordlist = skip(self, word_list)
-
-    def __init__(self, subj, verb, number, obj):
-         self.subj = subj
-         self.verb = verb
-         self.number = number
-         self.obj = obj
-
-    def skip(self, word_list, word_type):
-        while peek(word_list) == word_type:
-            match(word_list, word_type)
-
-a = Parse("Bear", "go", '2', "km")
-
-print a.subj
-print a.verb 
-print a.number
-print a.obj
-
-
 def parse_verb(word_list):
     skip(word_list, 'stop')
 
@@ -61,7 +39,6 @@ def parse_verb(word_list):
         return match(word_list, 'verb')
     else:
         raise ParserError("Expected a verb next.")
-
 
 def parse_number(word_list):
     skip(word_list, 'stop')
@@ -108,4 +85,3 @@ if __name__ == "__main__":
     print ("peek", peek(sentences))
     x = parse_sentence(sentences)
     print x.subject, x.verb, x.number, x.obj
-#    print Parse.__doc__

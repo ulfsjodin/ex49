@@ -3,11 +3,10 @@ class ParserError(Exception):
     pass
 
 class Sentence(object):
-    def __init__(self, subject, verb, number, obj):
+    def __init__(self, subject, verb, obj):
 
         self.subject = subject[1]
         self.verb = verb[1]
-        self.number = number[1]
         self.obj = obj[1]
 
 def peek(word_list):
@@ -40,14 +39,6 @@ def parse_verb(word_list):
     else:
         raise ParserError("Expected a verb next.")
 
-def parse_number(word_list):
-    skip(word_list, 'stop')
-
-    if peek(word_list) == 'number':
-        return match(word_list, 'number')
-    else:
-        raise ParserError("Expected a number next.")
-
 def parse_object(word_list):
     skip(word_list, 'stop')
     next_word = peek(word_list)
@@ -56,10 +47,8 @@ def parse_object(word_list):
         return match(word_list, 'noun')
     elif next_word == 'direction':
         return match(word_list, 'direction')
-    elif next_word == 'distance':
-        return match(word_list, 'distance')
     else:
-        raise ParserError("Expected a noun or distance next.")
+        raise ParserError("Expected a noun or direction next.")
 
 def parse_subject(word_list):
     skip(word_list, 'stop')
@@ -75,13 +64,6 @@ def parse_subject(word_list):
 def parse_sentence(word_list):
     subj = parse_subject(word_list)
     verb = parse_verb(word_list)
-    number = parse_number(word_list)
     obj = parse_object(word_list)
 
-    return Sentence(subj, verb, number, obj)
-
-if __name__ == "__main__":
-    sentences = [("noun", "player"), ('verb', 'go'), ('number', '3'), ('direction', 'north')]
-    print ("peek", peek(sentences))
-    x = parse_sentence(sentences)
-    print x.subject, x.verb, x.number, x.obj
+    return Sentence(subj, verb, obj)

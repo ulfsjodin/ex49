@@ -29,4 +29,9 @@ def test_raise_Parser_Error():
     with pytest.raises(ParserError):
         x = parse_sentence([('noun','princess'),('did','not')('verb','go'), ('direction','away')])
 
- 
+ def test_Parser_Error_msg():
+    """test that the error message when a exception is raised is correct"""
+    with pytest.raises(ParserError) as excinfo: 
+        x = parse_sentence([('noun','princess'),('verbs', 'go'),('direction','away')])
+    assert str(excinfo.value) == 'expected a verb next'
+

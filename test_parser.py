@@ -1,7 +1,6 @@
 import pytest
 from parser import ParserError, Sentence, match, parse_sentence, parse_subject
 
-# .......................................................................
 @pytest.fixture()
 def sentences():
     pass

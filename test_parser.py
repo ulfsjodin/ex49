@@ -26,10 +26,9 @@ def test_match():
     ord = word_list.pop(0)
     assert ord[0] == ('noun')
 
-def test_parse_subject():
-    x = parse_sentence([('noun','princess'),('verb','go'), ('direction','away')])
+def test_raise_Parser_Error():
 
-    with pytest.raises(ParserError): 
-       assert x.verb == 'go'
-       assert x.subject == 'princess'
+    with pytest.raises(ParserError):
+        x = parse_sentence([('noun','princess'),('did','not')('verb','go'), ('direction','away')])
 
+ 

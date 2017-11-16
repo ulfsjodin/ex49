@@ -26,7 +26,7 @@ def test_match():
 
 def test_raise_Parser_Error():
     with pytest.raises(ParserError):
-        x = parse_sentence([('noun','princess'),('did','not')('verb','go'), ('direction','away')])
+        x = parse_sentence([('noun','princess'),('obj', 'run'), ('direction','away')])
 
  def test_Parser_Error_msg():
     """test that the error message when a exception is raised is correct"""
